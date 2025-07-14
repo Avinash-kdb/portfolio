@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Roboto Mono", monospace;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            overflow-x: hidden;
+        }
+
+        .mobnav {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+
+        .mobnav a {
+            display: block;
+            color: #fff;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .mobnav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            width: 100%;
+            position: fixed;
+            height: 90px;
+            color: white;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar h3 {
+            margin-left: 65px;
+        }
+
+        .links {
+            display: flex;
+            gap: 65px;
+            justify-content: center;
+        }
+
+        .links a {
+            color: grey;
+            transition: 1s;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            margin-right: 65px;
+        }
+
+        .buttons a {
+            font-weight: 500;
+            font-size: 14px;
+            color: white;
+            width: 120px;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            gap: 3px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .menu {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .backtext1im{
+            margin-top: 100px !important;
+            width: 70%;
+        }
+
+        /* Education Section Styles */
+        .educations {
+            position: relative;
+            z-index: 10;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 100px 20px;
+        }
+
+        .items {
+            height: 140px;
+            width: 350px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+            transition: 0.5s;
+            background: linear-gradient(180deg, rgb(32, 32, 32) 0%, rgba(17,17,17,1) 100%);
+        }
+
+        .items h5 {
+            margin-top: 8px;
+            color: #40AF9B;
+        }
+
+        .items h6 {
+            margin-top: 4px;
+            color: grey;
+        }
+
+        .items p {
+            color: grey;
+            font-size: 12px;
+        }
+
+        /* Experience Section Styles */
+        .experience {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+            gap: 25px;
+            position: relative;
+            z-index: 10;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .card {
+            width: 420px;
+            height: 200px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .code-container {
+            background-color: #121212;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .line {
+            display: block;
+            color: #fff;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 4px 0;
+        }
+
+        .code-comment { color: #5c6370; }
+        .code-keyword { color: #c678dd; }
+        .code-function { color: #61afef; }
+        .code-variable { color: #dcdcaa; }
+        .code-string { color: #98c379; }
+        .indent { padding-left: 20px; }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 80px;
+            background-color: #111111;
+            padding: 60px 0;
+        }
+
+        footer h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            color: white;
+            width: 60%;
+            line-height: 30px;
+            font-size: 14px;
+            opacity: 0.5;
+            margin-bottom: 28px;
+        }
+
+        .team {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .team h4 {
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* Section Titles */
+        .backtext, .backtext1, .backtext2 {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            width: 350px;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .float-animation {
+            animation: float 2s ease-in-out infinite;
+        }
+        .float-animation2 {
+            animation: float2 2s ease-in-out infinite;
+        }
+
+        /* From Uiverse.io by drewsephski */ 
+.cardd {
+  padding: 0.75rem;
+  overflow: hidden;
+  border: 0.25px solid #c5c5c5;
+  border-radius: 20px;
+  background-color: #40AF9B;
+  backdrop-filter: blur(800px);
+  box-shadow: 0 0 40px 15px #40AF9B;
+  min-width: 400px;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 10;
+  border: 0.5px solid #525252;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.terminal {
+  display: flex;
+  flex-direction: column;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  min-height: 40px;
+  padding-inline: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #202425;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 2.5rem;
+  user-select: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #8e8e8e;
+}
+.title > svg {
+  height: 18px;
+  width: 18px;
+  margin-top: 2px;
+  color: #006adc;
+}
+.copy_toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  border: 0.65px solid darkgrey;
+  margin-left: auto;
+  border-radius: 6px;
+  background-color: #202425;
+  color: #8e8e8e;
+  cursor: pointer;
+  box-shadow: 0 0 15px deepskyblue;
+}
+.copy_toggle > svg {
+  width: 15px;
+  height: 15px;
+  box-shadow: 0 0 40px 2.5px blue;
+  animation: bounce;
+}
+.copy_toggle:active > svg > path,
+.copy_toggle:focus-within > svg > path {
+  animation: clipboard-check 5000ms linear forwards;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  overflow-x: auto;
+  padding: 1rem;
+  line-height: 20px;
+  color: white;
+  background-color: black;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+.pre {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-wrap: nowrap;
+  white-space: pre;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.pre code:nth-child(1) {
+  color: #575757;
+}
+.pre code:nth-child(2) {
+  color: #e34ba9;
+}
+.cmd {
+  height: 19px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.cmd::before {
+  content: attr(data-cmd);
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: transparent;
+  animation: inputs 8s steps(22) infinite;
+}
+.cmd::after {
+  content: "_";
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  border-right: 0.15em solid #e34ba9;
+  animation: cursor 0.5s step-end infinite alternate, blinking 0.4s infinite;
+}
+
+@keyframes blinking {
+  20%,
+  80% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+}
+@keyframes cursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
+@keyframes inputs {
+  0%,
+  100% {
+    width: 0;
+  }
+  10%,
+  90% {
+    width: 58px;
+  }
+  30%,
+  70% {
+    width: 400px;
+    max-width: max-content;
+  }
+}
+@keyframes clipboard-check {
+  100% {
+    color: deepskyblue;
+    d: path(
+      "M 9 5 H 7 a 2 2 0 0 0 -2 2 v 12 a 2 2 0 0 0 2 2 h 10 a 2 2 0 0 0 2 -2 V 7 a 2 2 0 0 0 -2 -2 h -2 M 9 5 a 2 2 0 0 0 2 2 h 2 a 2 2 0 0 0 2 -2 M 9 5 a 2 2 0 0 1 2 -2 h 2 a 2 2 0 0 1 2 2 m -6 9 l 2 2 l 4 -4"
+    );
+  }
+}
+
+
+        /* From Uiverse.io by Gaurang7717 */ 
+.Btnnn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  /* position: relative; */
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: #00d757;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  z-index: 100;
+}
+
+.sign {
+  width: 100%;
+  transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 25px;
+}
+
+.sign svg path {
+  fill: white;
+}
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+
+.Btnnn:hover {
+  width: 150px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+.Btnnn:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 10px;
+}
+
+.Btnnn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+.Btnnn:active {
+  transform: translate(2px, 2px);
+}
+
+
+        /* Responsive Design */
+        @media (max-width: 1080px) {
+            .navbar {
+                padding: 10px 20px;
+                height: auto;
+            }
+
+            .navbar h3 {
+                margin-left: 0;
+                font-size: 20px;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .links, .buttons {
+                display: none;
+            }
+
+            .mobnav {
+                display: none;
+            }
+
+            .mobnav.active {
+                display: block;
+            }
+
+            .items {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 420px;
+            }
+
+            footer p {
+                width: 80%;
+            }
+
+            .team {
+                flex-direction: column;
+                gap: 15px;
+            }
+      
+        }
+
+        @media (max-width: 480px) {
+          .pre{
+            font-size: 10px;
+          }
+          .cardd{
+            min-width:100%;
+          }
+            .navbar h3 {
+                font-size: 16px;
+            }
+
+            .menu {
+                font-size: 24px;
+            }
+
+            .items {
+                padding: 15px;
+            }
+
+            .code-container {
+                padding: 12px;
+            }
+
+            .line {
+                font-size: 12px;
+            }
+
+            footer p {
+                width: 90%;
+                font-size: 12px;
+                line-height: 24px;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .projectcontainer {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 20px;
+      /* overflow-x: scroll; */
+    }
+
+    h2 {
+        color: #ffffff;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: flex;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .cardd {
+        background: linear-gradient(180deg, rgb(32, 32, 32) 0%, rgba(17,17,17,1) 100%);
+      /* background: #fff; */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+
+    .cardd:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cardd .image-container {
+      position: relative;
+      overflow: hidden;
+      height: 180px;
+    }
+
+    .cardd img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cardd .image-container button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+
+    .cardd .image-container button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .cardd .image-container .prev {
+      left: 10px;
+    }
+
+    .cardd .image-container .next {
+      right: 10px;
+    }
+
+    .cardd .image-container .dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+    }
+
+    .cardd .image-container .dots div {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      /* background-color: #202425; */
+      cursor: pointer;
+    }
+
+    .cardd .image-container .dots .active {
+      background-color: white;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+        color: #40AF9B;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .tech-tags span {
+      background-color: #f0f0f0;
+      color: #555;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .view-project {
+      font-size: 0.9rem;
+      ;
+      text-decoration: none;
+      transition: color 0.3s;
+      color:#40AF9B;
+    }
+    
+    .view-project:hover {
+        color: #ffffff;
+        }
+
+        section::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+        
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h3>AVINASH K</h3>
+        <div class="links" id="navbarLinks">
+            <a href="#hm" onmouseover="hoveron(this)" onmouseout="hoverout(this)" onclick="dg()">Home</a>
+            <a href="#edu" onmouseover="hoveron(this)" onmouseout="hoverout(this)" onclick="dh()">Educations</a>
+            <a href="#backtext2" onmouseover="hoveron(this)" onmouseout="hoverout(this)" onclick="dj()">Experience</a>
+            <a href="#project" onmouseover="hoveron(this)" onmouseout="hoverout(this)">Projects</a>
+            <a href="#about" onmouseover="hoveron(this)" onmouseout="hoverout(this)">About</a>
+            <a href="#about" onmouseover="hoveron(this)" onmouseout="hoverout(this)">Contact Me</a>
+        </div>
+        <div class="buttons" id="navbarButtons">
+            <a href="images/Akshay Das full stack developer.pdf" download target="_blank">
+                Download CV <ion-icon name="cloud-download"></ion-icon>
+            </a>
+        </div>
+        <ion-icon name="menu" class="menu" onclick="toggleMenu()"></ion-icon>
+    </div>
+    <!-- Mobile Navigation -->
+    <div class="mobnav" id="mobileNav">
+        <a href="#hm">Home</a>
+        <a href="#educations">Educations</a>
+        <a href="#backtext2">Experience</a>
+        <a href="#project">Projects</a>
+        <a href="#about">About</a>
+        <a href="#about">Contact Me</a>
+        <a href="images/Akshay Das full stack developer.pdf" download target="_blank">Download CV</a>
+    </div>
+<div class="hm" id="hm"></div>
+    <!-- Education Section -->
+    <center>
+        <img class="backtext1im" src="images/Group 4.png" alt="" id="educations">
+    </center>
+    <center>
+        <img class="backtext2" src="images/educ.png" alt="" id="xperience" data-aos="fade-down">
+    </center>
+    <div class="educations" id="edu">
+        <div class="items" data-aos="zoom-in">
+            <h4><ion-icon name="school-sharp"></ion-icon> Bachelor of Computer Applications</h4>
+            <h5>IHRD College of Applied Science</h5>
+            <h6>chelakkara</h6>
+            <p>2024</p>
+        </div>
+        <div class="items" data-aos="zoom-in">
+            <h3><ion-icon name="school-sharp"></ion-icon> Plus Two</h3>
+            <h5>Government Higher Secondary School</h5>
+            <h6>Pampady</h6>
+            <p>2021</p>
+        </div>
+        <div class="items" data-aos="zoom-out">
+            <h3><ion-icon name="school-sharp"></ion-icon> SSLC</h3>
+            <h5>GVHSS Thiruvilwamala</h5>
+            <h6>Thiruvilwamala</h6>
+            <p>2019</p>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <center>
+        <img class="backtext2" src="images/experience.png" alt="" id="backtext2" data-aos="fade-down">
+    </center>
+    <div class="experience" data-aos="fade-up">
+        <div id="card" class="card">
+            <div class="content">
+                <div class="card-body">
+                    <div class="code-container float-animation">
+                        <span class="line"><span class="code-comment">//Jr python developer</span></span>
+                        <span class="line"><span class="code-keyword">function</span> <span class="code-function">Deep_Digits</span>(From 01/05/2024-now)</span>
+                        <span class="line">{</span>
+                        <span class="line indent"><span class="code-keyword">let</span> <span class="code-variable">message</span> = <span class="code-string">"Python django full-stack developer"</span>;</span>
+                        <span class="line indent"><span class="code-built-in">console</span>.<span class="code-method">log</span>(<span class="code-variable">message</span>);</span>
+                        <span class="line">}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="projectcontainer" id="project">
+    <section style="overflow-x:scroll;">
+      <center>
+        <img class="backtext2" src="/images/Group 2.png" alt="" id="backtext2" data-aos="fade-down">
+    </center>
+      <div class="grid" id="main-projects">
+        <!-- Cards will be injected here -->
+      </div>
+    </section>
+    <section>
+      <center>
+        <img class="backtext2" src="/images/Group 2 (2).png" alt="" id="backtext2" data-aos="fade-down">
+    </center>
+      <div class="grid" id="clone-projects">
+        <!-- Cards will be injected here -->
+      </div>
+    </section>
+  </div>
+
+
+
+    <!-- Footer -->
+    <footer id="about" data-aos="fade-up" style="position: relative;">
+        <button class="Btnnn float-animation2" onclick="sendMessage()">
+            <div class="sign">
+              <svg class="socialSvg whatsappSvg" viewBox="0 0 16 16">
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
+                ></path>
+              </svg>
+            </div>
+          
+            <div class="text">Whatsapp</div>
+          </button>
+        <h2>About Me</h2>
+        <p>To leverage my expertise in both front-end and back-end development to build scalable, efficient, and user-friendly web applications. Seeking a challenging position where I can contribute to innovative projects, collaborate with cross-functional teams, and continually expand my technical skills.</p>
+        <div class="team">
+            <h4>avinashavi1080@gmail.com</h4>
+            <h4>+91 7592931080</h4>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        function toggleMenu() {
+            const mobileNav = document.getElementById("mobileNav");
+            mobileNav.classList.toggle("active");
+        }
+
+        
+
+        function sendMessage() {
+    // Replace with the recipient's phone number (include country code, no "+" or "00")
+    const phoneNumber = "7592931080";
+
+    // Replace with your custom message
+    const message = "Hi, this is \n Name: \n Class: \n project name:" ;
+
+    // Encode the message
+    const encodedMessage = encodeURIComponent(message);
+
+    // Create the WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Open the WhatsApp chat
+    window.open(whatsappUrl, "_blank");
+  }
+
+        // function hoveron(element) {
+        //     const scrollY = window.scrollY;
+        //     if(scrollY > 130) {
+        //         element.style.color = "#40AF9B";
+        //         element.style.transform = "translateY(-5px)";
+        //     } else {
+        //         element.style.color = "#40AF9B";
+        //         element.style.transform = "translateY(-5px)";
+        //     }
+        // }
+
+        function hoverout(element) {
+            const scrollY = window.scrollY;
+            if(scrollY > 130) {
+                element.style.color = "white";
+                element.style.transform = "translateY(0px)";
+            } else {
+                element.style.color = "grey";
+                element.style.transform = "translateY(0px)";
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            const links = document.querySelectorAll('.links a');
+            
+            links.forEach(link => {
+                if(scrollY > 130) {
+                    link.style.color = "white";
+                } else {
+                    link.style.color = "grey";
+                }
+            });
+        });
+    </script>
+    <script>
+      const mainProjects = [
+    {
+      title: "BLOCK CHAIN BASED LOTTERY SYSTEM",
+      description: "A blockchain-based lottery system ensures transparency, fairness, and security by leveraging decentralized technology, smart contracts, and immutable records to automate lottery draws and prevent manipulation or fraud.",
+      images: ["/images/Screenshot (105).png", "/images/Screenshot (113).png", "/images/Screenshot (52).png", "/images/Screenshot (114).png","/images/Screenshot (115).png"],
+      link: "#",
+      tech: ["HTML", "CSS", "JAva Script", "DJango", "Ajax"]
+    },
+    {
+      title: "Student Consession Card Platform",
+      description: "A Student Concession Card Platform enables students to apply for travel concessions, register complaints, and interact with principals and RTOs through a streamlined system with secure access and role-based modules.",
+      images: ["/images/Screenshot 2025-07-06 111013.png", "/images/Screenshot 2025-07-06 111435.png", "/images/Screenshot 2025-07-06 113548.png", "/images/Screenshot 2025-07-06 113613.png","/images/Screenshot 2025-07-06 114327.png","/images/Screenshot 2025-07-06 114303.png","/images/Screenshot 2025-07-06 114208.png"],
+      link: "#",
+      tech: ["HTML", "CSS", "JAva Script", "DJango"]
+    },
+      {
+        title: "Spices Auction Platform",
+        description: "The Spices Auction Platform is a digital marketplace where sellers list spices for auction. It uses AI to analyze product quality, suggest fair price values, and generate detailed about spice from current market.",
+        images: ["/images/Screenshot 2025-07-06 123025.png", "/images/Screenshot 2025-07-06 123103.png", "/images/Screenshot 2025-07-06 123124.png", "/images/Screenshot 2025-07-06 123147.png","/images/Screenshot 2025-07-06 123638.png","/images/Screenshot 2025-07-06 123715.png","/images/Screenshot 2025-07-06 124108.png","/images/Screenshot 2025-07-06 133304.png","/images/Screenshot 2025-07-06 133349.png"],
+        link: "#",
+        tech: ["HTML", "CSS", "JAva Script", "DJango"]
+      },
+      {
+        title: "E-ommerce Platform",
+        description: "A full-featured online shopping platform with cart and checkout functionality",
+        images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+        link: "#",
+        tech: ["React", "Node.js", "MongoDB", "Express"]
+      }
+    // Add more projects here
+  ];
+  
+  
+  // const cloneProjects = [
+  //   {
+  //     title: "instagram Clone",
+  //     description: "A simple Instagram clone website created as my first clone project, featuring basic layout and design without responsiveness or partial functionality.",
+  //     images: ["images/Screenshot 2024-11-02 234428.png", "images/Screenshot (137).png", "images/Screenshot 2025-01-11 222842.png", "images/Screenshot (56).png","images/Screenshot (57).png","images/Screenshot (59).png"],
+  //     link: "#",
+  //     tech: ["HTML", "CSS", "JavaScript", "Bootstrap"]
+  //   }
+  // ];
+  
+  function createCard(project) {
+    const card = document.createElement("div");
+    card.classList.add("cardd");
+  
+    let currentImageIndex = 0;
+  
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+  
+    const img = document.createElement("img");
+    img.src = project.images[currentImageIndex];
+    imageContainer.appendChild(img);
+  
+    const prevButton = document.createElement("button");
+    prevButton.classList.add("prev");
+    prevButton.innerHTML = "&lt;";
+    prevButton.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+      img.src = project.images[currentImageIndex];
+      updateDots();
+    });
+    imageContainer.appendChild(prevButton);
+  
+    const nextButton = document.createElement("button");
+    nextButton.classList.add("next");
+    nextButton.innerHTML = "&gt;";
+    nextButton.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex + 1) % project.images.length;
+      img.src = project.images[currentImageIndex];
+      updateDots();
+    });
+    imageContainer.appendChild(nextButton);
+  
+    const dotsContainer = document.createElement("div");
+    dotsContainer.classList.add("dots");
+  
+    project.images.forEach((_, index) => {
+      const dot = document.createElement("div");
+      dot.addEventListener("click", () => {
+        currentImageIndex = index;
+        img.src = project.images[currentImageIndex];
+        updateDots();
+      });
+      dotsContainer.appendChild(dot);
+    });
+    imageContainer.appendChild(dotsContainer);
+  
+    function updateDots() {
+      dotsContainer.querySelectorAll("div").forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentImageIndex);
+      });
+    }
+    updateDots();
+  
+    card.appendChild(imageContainer);
+  
+    const content = document.createElement("div");
+    content.classList.add("card-content");
+  
+    const title = document.createElement("h3");
+    title.textContent = project.title;
+    content.appendChild(title);
+  
+    const description = document.createElement("p");
+    description.textContent = project.description;
+    content.appendChild(description);
+  
+    const techTags = document.createElement("div");
+    techTags.classList.add("tech-tags");
+    project.tech.forEach((tech) => {
+      const tag = document.createElement("span");
+      tag.textContent = tech;
+      techTags.appendChild(tag);
+    });
+    content.appendChild(techTags);
+  
+    const viewProject = document.createElement("a");
+    viewProject.href = project.link;
+    viewProject.textContent = "View Project →";
+    viewProject.classList.add("view-project");
+    content.appendChild(viewProject);
+  
+    card.appendChild(content);
+  
+    return card;
+  }
+  
+  const mainProjectsContainer = document.getElementById("main-projects");
+  mainProjects.forEach((project) => {
+    mainProjectsContainer.appendChild(createCard(project));
+  });
+  
+  const cloneProjectsContainer = document.getElementById("clone-projects");
+  cloneProjects.forEach((project) => {
+    cloneProjectsContainer.appendChild(createCard(project));
+  });
+  
+    </script>
+</body>
+</html>
+
